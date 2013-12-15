@@ -12,6 +12,7 @@
 #include "homewidget.h"
 #include "../version.h"
 #include <iostream>
+#include "../WinSparkle/winsparkle.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -73,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowTitle(ALQUDS_VERSION);
     setWindowIcon(QIcon(":/icons/128/kubbetussahra.png"));
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
     QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
                        QSettings::NativeFormat);
     if(settings.contains("alquds"))
@@ -88,6 +89,16 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
 
     createTrayIcon();
+
+
+
+    win_sparkle_init();
+    win_sparkle_check_update_with_ui();
+}
+
+MainWindow::~MainWindow()
+{
+    win_sparkle_cleanup();
 }
 
 void MainWindow::setCentralWidget(WinWidget *xCurr)
