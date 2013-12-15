@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QApplication>
 #include <QtGui>
+#include <QtWidgets>
 #include "winaction.h"
 #include "athaneditor.h"
 #include "../webservices/islamwayparser.h"

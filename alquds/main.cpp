@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     if (instance.sendMessage("Wake up!"))
         return 0;
     // TODO
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
+    //QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
 
 /*
     QTranslator translator;
