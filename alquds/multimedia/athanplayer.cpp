@@ -1,8 +1,9 @@
 #include "athanplayer.h"
-#include "../settings/athansettings.h"
 #include "mediaplayer.h"
 #include <qmediacontent.h>
 #include <QUrl>
+#include "athansettings.h"
+#include <QMessageBox>
 
 AthanPlayer::AthanPlayer(QObject *parent):
     PlayerInterface(parent)
@@ -13,6 +14,7 @@ AthanPlayer::AthanPlayer(QObject *parent):
 
     updateAthanFiles();
     connect(AthanSettings::instance(), SIGNAL(prayerFilesChanged()), this, SLOT(updateAthanFiles()));
+    connect(mPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(onError(QMediaPlayer::Error)));
 
 }
 
@@ -24,13 +26,21 @@ void AthanPlayer::playAthan(PrayerTimes::TimeID xTime)
     QUrl url(mFileList[xTime]);
     QMediaContent tContent(url);
     mPlayer->setMedia(tContent);    
-    mPlayer->play();
+    if(!AthanSettings::instance()->silentMode())
+        mPlayer->play();
 }
 
 void AthanPlayer::stopAthan()
 {
     if(mPlayer->state() == MediaPlayer::PlayingState)
         mPlayer->stop();
+}
+
+void AthanPlayer::onError(QMediaPlayer::Error err)
+{
+    QMessageBox msg;
+    msg.setText(mPlayer->errorString());
+    msg.exec();
 }
 
 void AthanPlayer::playFajrAthan()

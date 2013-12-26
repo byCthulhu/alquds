@@ -7,7 +7,7 @@
 #include "../multimedia/athanplayer.h"
 
 AthanEditor::AthanEditor(QWidget *parent) :
-    QWidget(parent),
+    WinWidget(parent),
     ui(new Ui::AthanEditor)
 {
     ui->setupUi(this);

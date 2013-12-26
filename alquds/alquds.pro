@@ -32,77 +32,100 @@ unix{
 
 
 SOURCES += \
-    ../alquds/gui/mainwindow.cpp \
-    ../alquds/prayertimes/location.cpp \
-    ../alquds/prayertimes/prayertimesadapter.cpp \
-    ../alquds/prayertimes/athanmanager.cpp \
-    ../alquds/gui/prayertimeswidget.cpp \
-    ../alquds/webservices/downloadmanager.cpp \
-    ../alquds/gui/winwidget.cpp \
-    ../alquds/gui/winaction.cpp \
-    ../alquds/multimedia/mediaplayer.cpp \
-    ../alquds/multimedia/playerinterface.cpp \
-    ../alquds/multimedia/athanplayer.cpp \
-    ../alquds/settings/locationsettings.cpp \
-    ../alquds/gui/locationeditor.cpp \
-    ../alquds/gui/prayertimeseditor.cpp \
-    ../alquds/settings/mediasettings.cpp \
-    ../alquds/settings/athansettings.cpp \
-    ../alquds/multimedia/mediamanager.cpp \
-    ../alquds/gui/athaneditor.cpp \
-    ../alquds/webservices/webparser.cpp \
-    ../alquds/webservices/islamwayparser.cpp \
-    ../alquds/gui/homewidget.cpp \
-    ../alquds/webservices/wathakkerservice.cpp \
-    ../alquds/settings/pathsettings.cpp \
-    main.cpp
+    gui/mainwindow.cpp \
+    prayertimes/location.cpp \
+    prayertimes/prayertimesadapter.cpp \
+    gui/prayertimeswidget.cpp \
+    webservices/downloadmanager.cpp \
+    gui/winwidget.cpp \
+    gui/winaction.cpp \
+    multimedia/mediaplayer.cpp \
+    multimedia/playerinterface.cpp \
+    multimedia/athanplayer.cpp \
+    settings/locationsettings.cpp \
+    gui/locationeditor.cpp \
+    gui/prayertimeseditor.cpp \
+    settings/mediasettings.cpp \
+    settings/athansettings.cpp \
+    multimedia/mediamanager.cpp \
+    gui/athaneditor.cpp \
+    webservices/webparser.cpp \
+    webservices/islamwayparser.cpp \
+    gui/homewidget.cpp \
+    webservices/wathakkerservice.cpp \
+    settings/pathsettings.cpp \
+    main.cpp \
+    settings/generalsettings.cpp \
+    gui/aboutwidget.cpp \
+    gui/athantraywidget.cpp \
+    prayertimes/athanmanager.cpp
 
 HEADERS += \
-    ../alquds/gui/mainwindow.h \
-    ../alquds/prayertimes/location.h \
-    ../alquds/prayertimes/prayertimes.hpp \
-    ../alquds/prayertimes/prayertimesadapter.h \
-    ../alquds/prayertimes/athanmanager.h \
-    ../alquds/gui/prayertimeswidget.h \
-    ../alquds/webservices/downloadmanager.h \
-    ../alquds/gui/winwidget.h \
-    ../alquds/gui/winaction.h \
-    ../alquds/multimedia/mediaplayer.h \
-    ../alquds/multimedia/playerinterface.h \
-    ../alquds/multimedia/athanplayer.h \
-    ../alquds/settings/locationsettings.h \
-    ../alquds/gui/prayertimeseditor.h \
-    ../alquds/gui/locationeditor.h \
-    ../alquds/settings/mediasettings.h \
-    ../alquds/settings/athansettings.h \
-    ../alquds/multimedia/mediamanager.h \
-    ../alquds/gui/athaneditor.h \
-    ../alquds/webservices/webparser.h \
-    ../alquds/webservices/islamwayparser.h \
-    ../alquds/gui/homewidget.h \
-    ../alquds/webservices/wathakkerservice.h \
-    ../alquds/version.h \
-    ../alquds/settings/pathsettings.h
+    gui/mainwindow.h \
+    prayertimes/location.h \
+    prayertimes/prayertimes.hpp \
+    prayertimes/prayertimesadapter.h \
+    gui/prayertimeswidget.h \
+    webservices/downloadmanager.h \
+    gui/winwidget.h \
+    gui/winaction.h \
+    multimedia/mediaplayer.h \
+    multimedia/playerinterface.h \
+    multimedia/athanplayer.h \
+    settings/locationsettings.h \
+    gui/prayertimeseditor.h \
+    gui/locationeditor.h \
+    settings/mediasettings.h \
+    settings/athansettings.h \
+    multimedia/mediamanager.h \
+    gui/athaneditor.h \
+    webservices/webparser.h \
+    webservices/islamwayparser.h \
+    gui/homewidget.h \
+    webservices/wathakkerservice.h \
+    version.h \
+    settings/pathsettings.h \
+    settings/generalsettings.h \
+    gui/aboutwidget.h \
+    gui/athantraywidget.h \
+    prayertimes/athanmanager.h
 
 FORMS += \
-    ../alquds/gui/prayertimeswidget.ui \
-    ../alquds/gui/locationeditor.ui \
-    ../alquds/gui/prayertimeseditor.ui \
-    ../alquds/gui/athaneditor.ui \
-    ../alquds/gui/homewidget.ui
+    gui/prayertimeswidget.ui \
+    gui/locationeditor.ui \
+    gui/prayertimeseditor.ui \
+    gui/athaneditor.ui \
+    gui/homewidget.ui \
+    gui/aboutwidget.ui
 
 RESOURCES += \
-    ../alquds/src/main.qrc \
-    ../alquds/src/icons.qrc
+    src/main.qrc \
+    src/icons.qrc
 
 OTHER_FILES += \
-    ../alquds/src/stylesheet.qss.css
+    src/stylesheet.qss.css
 
 
 
-win32: LIBS += -L$$PWD/../WinSparkle/ -lWinSparkle
+win32{
+    CONFIG(debug, debug|release) {
+        LIBS += -L$$PWD/../WinSparkle/debug/ -lWinSparkle
+        INCLUDEPATH += $$PWD/../WinSparkle/debug
+        DEPENDPATH += $$PWD/../WinSparkle/debug
+        PRE_TARGETDEPS += $$PWD/../WinSparkle/debug/WinSparkle.lib
+    }
+    else
+    {
+        LIBS += -L$$PWD/../WinSparkle/release/ -lWinSparkle
+        INCLUDEPATH += $$PWD/../WinSparkle/release
+        DEPENDPATH += $$PWD/../WinSparkle/release
+        PRE_TARGETDEPS += $$PWD/../WinSparkle/release/WinSparkle.lib
+    }
 
-INCLUDEPATH += $$PWD/../WinSparkle
-DEPENDPATH += $$PWD/../WinSparkle
+}
 
-win32: PRE_TARGETDEPS += $$PWD/../WinSparkle/WinSparkle.lib
+INCLUDEPATH += gui
+INCLUDEPATH += multimedia
+INCLUDEPATH += prayertimes
+INCLUDEPATH += settings
+INCLUDEPATH += webservices

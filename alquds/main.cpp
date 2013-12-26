@@ -22,6 +22,8 @@ public:
         QtSingleApplication(argc, argv)
     {
 
+        addLibraryPath(applicationDirPath());
+
 #ifdef Q_WS_MAC
 
     objc_object* cls = objc_getClass("NSApplication");
@@ -77,7 +79,7 @@ int main(int argc, char **argv)
     MainWindow w;
     instance.prWin = &w;
     w.show();
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
     QStringList args = instance.arguments();
     QString arg;
     if(args.count() > 1)
